@@ -1,2 +1,2 @@
-  @props(['name'])
+  @props(['name' => 'Dropdown'])
   <option {{ $attributes }}>{{ $name }}</option>

@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.border-gradient {
+    border-image-source: linear-gradient(
+        to bottom,
+        rgba(50, 138, 241, 0.22),
+        rgba(99, 123, 255, 0)
+    );
+    border-image-slice: 1;
+    background-image: linear-gradient(to bottom, #ffffff, #ffffff),
+        linear-gradient(
+            to bottom,
+            rgba(50, 138, 241, 0.22),
+            rgba(99, 123, 255, 0)
+        );
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+}
