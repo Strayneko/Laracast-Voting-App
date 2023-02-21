@@ -38,7 +38,8 @@
     {{-- ideas container --}}
     <div class="ideas-container space-y-6 my-6">
         {{-- idea container --}}
-        <div class="idea-container bg-white rounded-xl flex cursor-pointer hover:shadow-card">
+        <div
+            class="idea-container bg-white rounded-xl flex cursor-pointer transition duration-150 ease-in hover:shadow-card">
             <div class="border-r border-gray-100 px-5 py-8">
                 {{-- votes --}}
                 <div class="text-center">
@@ -55,34 +56,28 @@
                 </div>
             </div>
 
-            <div class="flex px-2 py-6">
-                <a href="" class="flex-shrink-0">
-                    <img src="https://source.unsplash.com/200x200/?face&crop=face&v=4" alt="avatar"
-                        class="w-14 h-14 rounded-xl">
-                </a>
+            <div class="flex flex-1 px-2 py-6">
+                <div class="flex-shrink-0">
+                    <a href="">
+                        <img src="https://source.unsplash.com/200x200/?face&crop=face&v=4" alt="avatar"
+                            class="w-14 h-14 rounded-xl">
+                    </a>
+                </div>
 
-                <div class="mx-4">
+                <div class="mx-4 w-full">
                     <h4 class="text-xl font-semibold">
                         <a href="" class="hover:underline">A random title can go here</a>
                     </h4>
 
                     <div class="text-gray-600 mt-3 line-clamp-3">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eos dolores, ducimus cum ad voluptatum
-                        error quibusdam quo, incidunt ullam fuga in quaerat facere saepe blanditiis deleniti quasi
-                        dignissimos ab inventore, laudantium dolor doloribus! Doloribus adipisci quae quis est
-                        consectetur, aut consequatur sint, maxime eveniet accusamus beatae libero ab deserunt tenetur
-                        corporis assumenda ut id placeat quisquam expedita quam quo dolor. Iusto praesentium unde
-                        reiciendis autem vitae, exercitationem illum consequuntur. Labore sequi blanditiis velit
-                        possimus itaque consectetur dignissimos illum non accusamus? Cupiditate enim natus delectus quia
-                        voluptatibus, officia sequi repellat dolorum eos tenetur vero suscipit, accusamus similique
-                        harum blanditiis dolore veritatis?
+                        Lorem ipsum dolor sit amet consectetur
                     </div>
 
                     <div class="flex items-center justify-between mt-6">
                         <div class="flex items-center text-xs font-semibold space-x-2 text-gray-400">
                             <time>10 hours ago</time>
                             <div>&bull;</div>
-                            <time>1 Category</time>
+                            <div>1 Category</div>
                             <div>&bull;</div>
                             <div class="text-gray-900">3 Comments</div>
                         </div>
@@ -96,7 +91,7 @@
                             </div>
                             {{-- end of status --}}
                             <button
-                                class="bg-gray-100 hover:bg-gray-200 rounded-full h-7 transition duration-150 ease-in py-2 px-3 relative">
+                                class="bg-gray-100 border hover:bg-gray-200 rounded-full h-7 transition duration-150 ease-in py-2 px-3 relative">
                                 <svg fill="currentColor" width="24" height="6">
                                     <path
                                         d="M2.97.061A2.969 2.969 0 000 3.031 2.968 2.968 0 002.97 6a2.97 2.97 0 100-5.94zm9.184 0a2.97 2.97 0 100 5.939 2.97 2.97 0 100-5.939zm8.877 0a2.97 2.97 0 10-.003 5.94A2.97 2.97 0 0021.03.06z"
