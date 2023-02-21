@@ -46,14 +46,14 @@
                     </div>
 
 
-                    <div class="flex items-center space-x-2">
+                    <div class="flex items-center space-x-2" x-data="{ isOpen: false }">
                         {{-- status --}}
                         <div
                             class="bg-gray-200 text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">
                             Open
                         </div>
                         {{-- end of status --}}
-                        <button
+                        <button @click="isOpen = !isOpen"
                             class="bg-gray-100 border hover:bg-gray-200 rounded-full h-7 transition duration-150 ease-in py-2 px-3 relative">
                             <svg fill="currentColor" width="24" height="6">
                                 <path
@@ -62,8 +62,9 @@
                             </svg>
 
                             {{-- dialog --}}
-                            <ul
-                                class="absolute hidden w-44 font-semibold bg-white shadow-dialog text-left rounded-xl py-3 ml-8">
+                            <ul x-cloak x-show="isOpen" x-transition.origin.top.left @click.away="isOpen = false"
+                                @keydown.escape.window="isOpen = false"
+                                class="absolute  w-44 font-semibold bg-white shadow-dialog text-left rounded-xl py-3 ml-8">
                                 <li>
                                     <a href=""
                                         class="hover:bg-gray-100 block px-5 py-3 transition duration-150 ease-in">
@@ -90,14 +91,16 @@
     {{-- buttons container --}}
     <div class="button-container flex items-center justify-between mt-6">
         <div class="flex space-x-4 ml-6 items-center">
-            <div class="relative">
-                <button type="button"
+            <div class="relative" x-data="{ isOpen: false }">
+
+                <button @click="isOpen = !isOpen" type="button"
                     class="flex items-center w-36 justify-center  h-9 text-xs bg-theme-blue-primary font-semibold rounded-xl border border-theme-blue-primary text-white hover:border-theme-blue-hover hover:bg-theme-blue-hover transition duration-150 ease-in px-6 py-3">
                     <span class="">Reply</span>
                 </button>
 
-                <div
-                    class="absolute hidden z-10 bg-white shadow-dialog rounded-xl mt-2 w-[26rem] text-left font-semibold text-sm">
+                <div x-cloak x-show="isOpen" x-transition.origin.top.left @click.away="isOpen = false"
+                    @keydown.escape.window="isOpen = false"
+                    class="absolute z-10 bg-white shadow-dialog rounded-xl mt-2 w-[26rem] text-left font-semibold text-sm">
                     <form action="" class="space-y-4 px-4 py-6">
                         <div>
                             <textarea name="post_comment" id="post_comment" cols="30" rows="4"
@@ -126,8 +129,8 @@
             </div>
 
 
-            <div class="relative">
-                <button type="button"
+            <div class="relative" x-data="{ isOpen: false }">
+                <button @click="isOpen = !isOpen" type="button"
                     class="flex items-center justify-center w-36 flex-shrink-0 h-9 text-xs bg-gray-200 font-semibold rounded-xl border border-gray-200 hover:border-gray-400 transition duration-150 ease-in px-6 py-3">
                     <span class="mr-2">Set Status</span>
                     <svg class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -135,8 +138,9 @@
                     </svg>
                 </button>
 
-                <div
-                    class="absolute z-20 bg-white shadow-dialog  rounded-xl mt-2 w-[19rem] text-left font-semibold text-sm">
+                <div x-cloak x-show="isOpen" x-transition.origin.top.left @click.away="isOpen = false"
+                    @keydown.escape.window="isOpen = false"
+                    class="absolute  z-20 bg-white shadow-dialog  rounded-xl mt-2 w-[19rem] text-left font-semibold text-sm">
                     <form action="" class="space-y-4 px-4 py-6">
                         {{-- options --}}
                         <div class="space-y-2">
@@ -150,16 +154,16 @@
                             <div>
                                 <label class="inline-flex items-center cursor-pointer">
                                     <input type="radio"
-                                        class="bg-gray-200 text-theme-purple border-none cursor-pointer" name="status"
-                                        value="2">
+                                        class="bg-gray-200 text-theme-purple border-none cursor-pointer"
+                                        name="status" value="2">
                                     <span class="ml-2">Considering</span>
                                 </label>
                             </div>
                             <div>
                                 <label class="inline-flex items-center cursor-pointer">
                                     <input type="radio"
-                                        class="bg-gray-200 text-theme-yellow border-none cursor-pointer" name="status"
-                                        value="3">
+                                        class="bg-gray-200 text-theme-yellow border-none cursor-pointer"
+                                        name="status" value="3">
                                     <span class="ml-2">In Progress</span>
                                 </label>
                             </div>
@@ -265,8 +269,8 @@
                         </div>
 
 
-                        <div class="flex items-center space-x-2">
-                            <button
+                        <div class="flex items-center space-x-2" x-data="{ isOpen: false }">
+                            <button @click="isOpen = !isOpen"
                                 class="bg-gray-100 border hover:bg-gray-200 rounded-full h-7 transition duration-150 ease-in py-2 px-3 relative">
                                 <svg fill="currentColor" width="24" height="6">
                                     <path
@@ -275,8 +279,9 @@
                                 </svg>
 
                                 {{-- dialog --}}
-                                <ul
-                                    class="absolute hidden w-44 font-semibold bg-white shadow-dialog text-left rounded-xl py-3 ml-8">
+                                <ul x-cloak x-show="isOpen" x-transition.origin.top.left @click.away="isOpen = false"
+                                    @keydown.escape.window="isOpen = false"
+                                    class="absolute z-10 w-44 font-semibold bg-white shadow-dialog text-left rounded-xl py-3 ml-8">
                                     <li>
                                         <a href=""
                                             class="hover:bg-gray-100 block px-5 py-3 transition duration-150 ease-in">

@@ -83,14 +83,14 @@
                         </div>
 
 
-                        <div class="flex items-center space-x-2">
+                        <div x-data="{ isOpen: false }" class="flex items-center space-x-2">
                             {{-- status --}}
                             <div
                                 class="bg-gray-200 text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">
                                 Open
                             </div>
                             {{-- end of status --}}
-                            <button
+                            <button @click="isOpen = !isOpen"
                                 class="bg-gray-100 border hover:bg-gray-200 rounded-full h-7 transition duration-150 ease-in py-2 px-3 relative">
                                 <svg fill="currentColor" width="24" height="6">
                                     <path
@@ -99,7 +99,8 @@
                                 </svg>
 
                                 {{-- dialog --}}
-                                <ul
+                                <ul x-cloak x-show="isOpen" x-transition.origin.top.left @click.away="isOpen = false"
+                                    @keydown.escape.window="isOpen = false"
                                     class="absolute w-44 font-semibold bg-white shadow-dialog text-left rounded-xl py-3 ml-8">
                                     <li>
                                         <a href=""

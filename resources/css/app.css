@@ -77,3 +77,7 @@
     opacity: 1;
     @apply bg-theme-purple;
 }
+
+[x-cloak] {
+    @apply !hidden;
+}
