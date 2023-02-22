@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreIdeaRequest;
 use App\Http\Requests\UpdateIdeaRequest;
 use App\Models\Idea;
+use App\Models\Vote;
 
 class IdeaController extends Controller
 {
@@ -17,6 +18,13 @@ class IdeaController extends Controller
     {
         // get all idea
         $ideas = Idea::with(['category', 'user', 'status'])
+            // subquery to get vote id that voted by current authenticated user
+            ->addSelect([
+                'voted_by_user' => Vote::select('id')
+                    ->where('user_id', auth()->id())
+                    ->whereColumn('idea_id', 'ideas.id')
+            ])
+            // ordering from latest data / latest()
             ->orderByDesc('id')
             ->withCount('votes')
             ->simplePaginate(Idea::PAGINATION_COUNT);

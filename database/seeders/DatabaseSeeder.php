@@ -62,6 +62,7 @@ class DatabaseSeeder extends Seeder
 
         Idea::factory(100)->create();
 
+
         // genereate unique votes. Ensure idea_id and user_id unique for each row
         foreach (range(1, 20) as $user_id) {
             foreach (range(1, 100) as $idea_id) {
