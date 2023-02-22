@@ -10,6 +10,7 @@ use App\Models\Status;
 use Livewire\Livewire;
 use App\Models\Category;
 use App\Http\Livewire\IdeaIndex;
+use App\Http\Livewire\IdeasIndex;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -39,7 +40,7 @@ class VotesIndexPageTest extends TestCase
     }
 
     /** @test */
-    public function index_page_correctly_receives_votes_count()
+    public function ideas_index_livewire_component_correctly_receives_votes_count()
     {
         $user = User::factory()->create();
         $userB = User::factory()->create();
@@ -66,10 +67,16 @@ class VotesIndexPageTest extends TestCase
             'user_id' => $userB->id,
         ]);
 
-        $this->get(route('idea.index'))
-            ->assertViewHas('ideas', function ($ideas) {
+        Livewire::test(IdeasIndex::class)->assertViewHas(
+            'ideas',
+            function ($ideas) {
                 return $ideas->first()->votes_count == 2;
-            });
+            }
+        );
+        // $this->get(route('idea.index'))
+        //     ->assertViewHas('ideas', function ($ideas) {
+        //         return $ideas->first()->votes_count == 2;
+        //     });
     }
 
     /** @test */
@@ -122,13 +129,12 @@ class VotesIndexPageTest extends TestCase
             'user_id' => $user->id,
         ]);
 
-        $response = $this->actingAs($user)->get(route('idea.index'));
-
-        $ideaWithVotes = $response['ideas']->items()[0];
+        $idea->votes_count = 1;
+        $idea->voted_by_user = 1;
 
         Livewire::actingAs($user)
             ->test(IdeaIndex::class, [
-                'idea' => $ideaWithVotes,
+                'idea' => $idea,
                 'votesCount' => 5,
             ])
             ->assertSet('hasVoted', true)
@@ -195,10 +201,8 @@ class VotesIndexPageTest extends TestCase
             'user_id' => $user->id,
         ]);
 
-        $response = $this->actingAs($user)->get(route('idea.index'));
-
-        $ideaWithVotes = $response['ideas']->items()[0];
-
+        $idea->votes_count = 1;
+        $idea->voted_by_user = 1;
 
         $this->assertDatabaseHas('votes', [
             'user_id' => $user->id,
@@ -207,7 +211,7 @@ class VotesIndexPageTest extends TestCase
 
         Livewire::actingAs($user)
             ->test(IdeaIndex::class, [
-                'idea' => $ideaWithVotes,
+                'idea' => $idea,
                 'votesCount' => 5,
             ])
             ->call('vote')
