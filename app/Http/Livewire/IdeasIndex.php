@@ -10,7 +10,7 @@ use Livewire\WithPagination;
 
 class IdeasIndex extends Component
 {
-    use WithPagination;
+    // use WithPagination;
 
     public function render()
     {
