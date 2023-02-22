@@ -47,4 +47,27 @@ class User extends Authenticatable
     {
         return $this->hasMany(Idea::class);
     }
+
+
+    public function getAvatar(): string
+    {
+
+        // get user email first character
+        $firstCharacter = $this->email[0];
+
+
+        // get integer from user first email character
+        $integerToUse = is_numeric($firstCharacter) ?
+            ord(strtolower($firstCharacter)) - 21 :
+            ord(strtolower($firstCharacter)) - 96;
+
+
+        // hash user email
+        $emailHash     = md5($this->email);
+
+        // get avatar image from gravatar by hashed user email
+        // and get the default image if the email is not exist in gravatar by first character of user email
+
+        return "https://www.gravatar.com/avatar/{$emailHash}?s=200&d=https://s3.amazonaws.com/laracasts/images/forum/avatars/default-avatar-{$integerToUse}.png";
+    }
 }
