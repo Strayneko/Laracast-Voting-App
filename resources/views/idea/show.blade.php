@@ -35,7 +35,7 @@
                         <div class="hidden md:block">&bull;</div>
                         <time>{{ $idea->created_at->diffForHumans() }}</time>
                         <div>&bull;</div>
-                        <div>1 Category</div>
+                        <div>{{ $idea->category->name }}</div>
                         <div>&bull;</div>
                         <div class="text-gray-900">3 Comments</div>
                     </div>

@@ -31,4 +31,10 @@ class Idea extends Model
             ]
         ];
     }
+
+    // relation to category model
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
