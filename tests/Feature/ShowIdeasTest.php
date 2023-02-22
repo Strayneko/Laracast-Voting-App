@@ -92,15 +92,14 @@ class ShowIdeasTest extends TestCase
         $ideaEleven->title = 'My Eleventh Idea';
         $ideaEleven->save();
 
-        $response = $this->get('/');
-
-        $response->assertSee($ideaOne->title);
-        $response->assertDontSee($ideaEleven->title);
+        $response = $this->get(route('idea.index'));
+        $response->assertSee($ideaEleven->title);
+        $response->assertDontSee($ideaOne->title);
 
         $response = $this->get('/?page=2');
 
-        $response->assertSee($ideaEleven->title);
-        $response->assertDontSee($ideaOne->title);
+        $response->assertSee($ideaOne->title);
+        $response->assertDontSee($ideaEleven->title);
     }
 
     /** @test */
