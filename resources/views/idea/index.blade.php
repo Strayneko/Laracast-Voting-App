@@ -1,4 +1,23 @@
 <x-app-layout>
+    <script>
+        window.addEventListener('alpine:init', () => {
+            Alpine.data('events', () => ({
+                ignores: ['button', 'svg', 'path', 'a'],
+                handleClick($e) {
+                    const clicked = $e.target;
+                    // get element tagname that user clicked on
+                    const target = $e.target.tagName.toLowerCase();
+
+                    // check element tagname, if element tagname not available in ignore list
+                    // click the idea-link element
+                    if (!this.ignores.includes(target)) $e.target.closest(
+                            '.idea-container')
+                        .querySelector('.idea-link').click()
+
+                }
+            }))
+        })
+    </script>
     {{-- filters --}}
     <div class="filters flex space-y-2 md:space-y-0 md:space-x-6 flex-col md:flex-row">
 
@@ -40,7 +59,7 @@
 
         @foreach ($ideas as $idea)
             {{-- idea container --}}
-            <div
+            <div x-data="events" @click="handleClick($event)"
                 class="idea-container bg-white rounded-xl flex cursor-pointer transition duration-150 ease-in hover:shadow-card">
                 <div class="border-r hidden md:block border-gray-100 px-5 py-8">
                     {{-- votes --}}
@@ -71,7 +90,7 @@
                     <div class="mx-4 w-full flex flex-col justify-between">
                         <h4 class="text-xl font-semibold mt-2 md:mt-0">
                             <a href="{{ route('idea.show', ['idea' => $idea]) }}"
-                                class="hover:underline">{{ $idea->title }}</a>
+                                class="hover:underline idea-link">{{ $idea->title }}</a>
                         </h4>
 
                         <div class="text-gray-600 mt-3 line-clamp-3">
