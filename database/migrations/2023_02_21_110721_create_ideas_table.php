@@ -17,6 +17,13 @@ class CreateIdeasTable extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->foreignId('category_id');
+
+            // 1. Open
+            // 2. Considering
+            // 3. In Progress
+            // 4. Implemented
+            // 5. Closed
+            $table->foreignId('status_id');
             $table->string('title');
             $table->string('slug')->nullable()->unique();
             $table->text('description');

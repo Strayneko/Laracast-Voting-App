@@ -7,6 +7,7 @@ use App\Models\Idea;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\Status;
 
 class ShowIdeasTest extends TestCase
 {
@@ -20,8 +21,13 @@ class ShowIdeasTest extends TestCase
         $categoryOne = Category::factory()->create(['name' => 'Category 1']);
         $categoryTwo = Category::factory()->create(['name' => 'Category 2']);
 
+
+        $statusOpen = Status::factory()->create(['name' => 'Open', 'classes' => 'bg-gray-200']);
+        $statusConsidering = Status::factory()->create(['name' => 'Considering', 'classes' => 'bg-purple text-white']);
+
         $ideaOne = Idea::factory()->create([
             'title' => 'My First Idea',
+            'status_id' => $statusOpen->id,
             'category_id' => $categoryOne->id,
             'description' => 'Description Of my first Idea',
         ]);
@@ -29,6 +35,7 @@ class ShowIdeasTest extends TestCase
         $ideaTwo = Idea::factory()->create([
             'title' => 'My second Idea',
             'category_id' => $categoryTwo->id,
+            'status_id' => $statusConsidering->id,
             'description' => 'Description Of my second Idea',
         ]);
 
@@ -49,9 +56,11 @@ class ShowIdeasTest extends TestCase
 
         $categoryOne = Category::factory()->create(['name' => 'Category 1']);
 
+        $statusOpen = Status::factory()->create(['name' => 'Open', 'classes' => 'bg-gray-200']);
 
         $idea = Idea::factory()->create([
             'title' => 'My First Idea',
+            'status_id' => $statusOpen,
             'category_id' => $categoryOne->id,
             'description' => 'Description Of my first Idea',
         ]);
@@ -69,8 +78,10 @@ class ShowIdeasTest extends TestCase
     {
         $categoryOne = Category::factory()->create(['name' => 'Category 1']);
 
+        $statusOpen = Status::factory()->create(['name' => 'Open', 'classes' => 'bg-gray-200']);
         Idea::factory(Idea::PAGINATION_COUNT + 1)->create([
-            'category_id' => $categoryOne
+            'category_id' => $categoryOne,
+            'status_id' => $statusOpen->id,
         ]);
 
         $ideaOne = Idea::find(1);
@@ -97,14 +108,17 @@ class ShowIdeasTest extends TestCase
     {
 
         $categoryOne = Category::factory()->create(['name' => 'Category 1']);
+        $statusOpen = Status::factory()->create(['name' => 'Open', 'classes' => 'bg-gray-200']);
 
         $ideaOne = Idea::factory()->create([
             'category_id' => $categoryOne->id,
+            'status_id' => $statusOpen->id,
             'title' => 'My First Idea',
             'description' => 'Description for my first Idea',
         ]);
 
         $ideaTwo = Idea::factory()->create([
+            'status_id' => $statusOpen->id,
             'category_id' => $categoryOne->id,
             'title' => 'My First Idea',
             'description' => 'Description Of my second Idea',
