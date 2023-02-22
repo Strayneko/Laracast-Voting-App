@@ -4,6 +4,8 @@ namespace App\Http\Livewire;
 
 use App\Models\Idea;
 use Livewire\Component;
+use App\Exceptions\VoteNotFoundException;
+use App\Exceptions\DuplicateVoteException;
 
 class IdeaIndex extends Component
 {
@@ -26,11 +28,21 @@ class IdeaIndex extends Component
         // remove vote when it's been voted
         //  and vote it when the user has not yet voted
         if ($this->hasVoted) {
-            $this->idea->removeVote(auth()->user());
+            try {
+                $this->idea->removeVote(auth()->user());
+            } catch (VoteNotFoundException $e) {
+                // do nothing
+            }
+
             $this->votesCount--;
             $this->hasVoted = false;
         } else {
-            $this->idea->vote(auth()->user());
+            try {
+                $this->idea->vote(auth()->user());
+            } catch (DuplicateVoteException $e) {
+                // do nothing
+            }
+
             $this->votesCount++;
             $this->hasVoted = true;
         }
