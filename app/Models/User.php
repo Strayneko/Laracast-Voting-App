@@ -70,4 +70,10 @@ class User extends Authenticatable
 
         return "https://www.gravatar.com/avatar/{$emailHash}?s=200&d=https://s3.amazonaws.com/laracasts/images/forum/avatars/default-avatar-{$integerToUse}.png";
     }
+
+
+    public function votes()
+    {
+        return $this->belongsToMany(Idea::class, 'votes');
+    }
 }

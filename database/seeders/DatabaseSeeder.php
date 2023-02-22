@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use App\Models\Category;
 use App\Models\Idea;
 use App\Models\Status;
+use App\Models\User;
+use App\Models\Vote;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,7 +18,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        User::factory()->create([
+            'name' => 'Rendi',
+            'email' => 'bayurendi10@gmail.com',
+        ]);
+        User::factory(19)->create();
 
         Idea::factory(30)->create();
         Category::factory()->create([
@@ -53,5 +59,19 @@ class DatabaseSeeder extends Seeder
             'name' => 'Closed',
             'classes' => 'bg-theme-red text-white',
         ]);
+
+        Idea::factory(100)->create();
+
+        // genereate unique votes. Ensure idea_id and user_id unique for each row
+        foreach (range(1, 20) as $user_id) {
+            foreach (range(1, 100) as $idea_id) {
+                if ($idea_id  % 2 === 0) {
+                    Vote::factory()->create([
+                        'user_id' => $user_id,
+                        'idea_id' => $idea_id
+                    ]);
+                }
+            }
+        }
     }
 }
