@@ -35,6 +35,10 @@
                 <x-filter-dropdown-item value="No Filter" name="No Filter" />
                 <x-filter-dropdown-item value="Top Voted" name="Top Voted" />
                 <x-filter-dropdown-item value="My Ideas" name="My Ideas" />
+
+                @admin
+                    <x-filter-dropdown-item value="Spam Ideas" name="Spam Ideas" />
+                @endadmin
             </x-filter-dropdown>
         </div>
 

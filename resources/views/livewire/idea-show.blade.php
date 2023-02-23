@@ -16,6 +16,11 @@
                 </h4>
 
                 <div class="text-gray-600 mt-3 ">
+                    @admin
+                        @if ($idea->spam_reports > 0)
+                            <div class="text-theme-red mb-2">Spam Reports: {{ $idea->spam_reports }}</div>
+                        @endif
+                    @endadmin
                     {{ $idea->description }}
                 </div>
 
@@ -62,10 +67,22 @@
                                 @endcan
                                 <li>
                                     <a href=""
+                                        @click.prevent="isOpen = false, $dispatch('custom-show-mark-idea-as-spam-modal')"
                                         class="hover:bg-gray-100 block px-5 py-3 transition duration-150 ease-in">
                                         Mark as spam
                                     </a>
                                 </li>
+                                @admin
+                                    @if ($idea->spam_reports > 0)
+                                        <li>
+                                            <a href=""
+                                                @click.prevent="isOpen = false, $dispatch('custom-show-mark-idea-as-not-spam-modal')"
+                                                class="hover:bg-gray-100 block px-5 py-3 transition duration-150 ease-in">
+                                                Not spam
+                                            </a>
+                                        </li>
+                                    @endif
+                                @endadmin
                                 <li>
                                     @can('delete', $idea)
                                         <a href=""
@@ -148,11 +165,9 @@
                 </div>
             </div>
 
-            @if (auth()
-                    ?->user()
-                    ?->isAdmin())
+            @admin
                 <livewire:set-status :idea="$idea" />
-            @endif
+            @endadmin
         </div>
 
         {{-- votes --}}
