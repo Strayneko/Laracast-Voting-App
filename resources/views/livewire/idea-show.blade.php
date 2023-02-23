@@ -42,59 +42,62 @@
                             class="{{ $idea->status->classes }} text-xxs font-bold uppercase leading-none rounded-full text-center w-28 h-7 py-2 px-4">
                             {{ $idea->status->name }}</div>
                         {{-- end of status --}}
-                        <div class="relative">
-                            <button @click="isOpen = !isOpen"
-                                class="bg-gray-100 border hover:bg-gray-200 rounded-full h-7 transition duration-150 ease-in py-2 px-3 relative">
-                                <svg fill="currentColor" width="24" height="6">
-                                    <path
-                                        d="M2.97.061A2.969 2.969 0 000 3.031 2.968 2.968 0 002.97 6a2.97 2.97 0 100-5.94zm9.184 0a2.97 2.97 0 100 5.939 2.97 2.97 0 100-5.939zm8.877 0a2.97 2.97 0 10-.003 5.94A2.97 2.97 0 0021.03.06z"
-                                        style="color: rgba(163, 163, 163, .5)">
-                                </svg>
-                            </button>
 
-                            {{-- dialog --}}
-                            <ul x-cloak x-show="isOpen" x-transition.origin.top.left @click.away="isOpen = false"
-                                @keydown.escape.window="isOpen = false"
-                                class="absolute  w-44 font-semibold bg-white shadow-dialog text-left rounded-xl py-3 md:ml-8 top-8 md:top-6 right-0 md:left-0 z-10">
-                                @can('update', $idea)
-                                    <li>
-                                        <a href=""
-                                            @click.prevent="isOpen = false, $dispatch('custom-show-edit-modal')"
-                                            class="hover:bg-gray-100 block px-5 py-3 transition duration-150 ease-in">
-                                            Edit Idea
-                                        </a>
-                                    </li>
-                                @endcan
-                                <li>
-                                    <a href=""
-                                        @click.prevent="isOpen = false, $dispatch('custom-show-mark-idea-as-spam-modal')"
-                                        class="hover:bg-gray-100 block px-5 py-3 transition duration-150 ease-in">
-                                        Mark as spam
-                                    </a>
-                                </li>
-                                @admin
-                                    @if ($idea->spam_reports > 0)
+                        @auth
+                            <div class="relative">
+                                <button @click="isOpen = !isOpen"
+                                    class="bg-gray-100 border hover:bg-gray-200 rounded-full h-7 transition duration-150 ease-in py-2 px-3 relative">
+                                    <svg fill="currentColor" width="24" height="6">
+                                        <path
+                                            d="M2.97.061A2.969 2.969 0 000 3.031 2.968 2.968 0 002.97 6a2.97 2.97 0 100-5.94zm9.184 0a2.97 2.97 0 100 5.939 2.97 2.97 0 100-5.939zm8.877 0a2.97 2.97 0 10-.003 5.94A2.97 2.97 0 0021.03.06z"
+                                            style="color: rgba(163, 163, 163, .5)">
+                                    </svg>
+                                </button>
+
+                                {{-- dialog --}}
+                                <ul x-cloak x-show="isOpen" x-transition.origin.top.left @click.away="isOpen = false"
+                                    @keydown.escape.window="isOpen = false"
+                                    class="absolute  w-44 font-semibold bg-white shadow-dialog text-left rounded-xl py-3 md:ml-8 top-8 md:top-6 right-0 md:left-0 z-10">
+                                    @can('update', $idea)
                                         <li>
                                             <a href=""
-                                                @click.prevent="isOpen = false, $dispatch('custom-show-mark-idea-as-not-spam-modal')"
+                                                @click.prevent="isOpen = false, $dispatch('custom-show-edit-modal')"
                                                 class="hover:bg-gray-100 block px-5 py-3 transition duration-150 ease-in">
-                                                Not spam
+                                                Edit Idea
                                             </a>
                                         </li>
-                                    @endif
-                                @endadmin
-                                <li>
-                                    @can('delete', $idea)
-                                        <a href=""
-                                            @click.prevent="isOpen = false, $dispatch('custom-show-delete-modal')"
-                                            class="hover:bg-gray-100 block px-5 py-3 transition duration-150 ease-in">
-                                            Delete Idea
-                                        </a>
                                     @endcan
-                                </li>
-                            </ul>
-                            {{-- end of dialog --}}
-                        </div>
+                                    <li>
+                                        <a href=""
+                                            @click.prevent="isOpen = false, $dispatch('custom-show-mark-idea-as-spam-modal')"
+                                            class="hover:bg-gray-100 block px-5 py-3 transition duration-150 ease-in">
+                                            Mark as Spam
+                                        </a>
+                                    </li>
+                                    @admin
+                                        @if ($idea->spam_reports > 0)
+                                            <li>
+                                                <a href=""
+                                                    @click.prevent="isOpen = false, $dispatch('custom-show-mark-idea-as-not-spam-modal')"
+                                                    class="hover:bg-gray-100 block px-5 py-3 transition duration-150 ease-in">
+                                                    Not Spam
+                                                </a>
+                                            </li>
+                                        @endif
+                                    @endadmin
+                                    <li>
+                                        @can('delete', $idea)
+                                            <a href=""
+                                                @click.prevent="isOpen = false, $dispatch('custom-show-delete-modal')"
+                                                class="hover:bg-gray-100 block px-5 py-3 transition duration-150 ease-in">
+                                                Delete Idea
+                                            </a>
+                                        @endcan
+                                    </li>
+                                </ul>
+                                {{-- end of dialog --}}
+                            </div>
+                        @endauth
                     </div>
 
                     {{-- mobile votes --}}

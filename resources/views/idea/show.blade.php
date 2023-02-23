@@ -26,8 +26,12 @@
         {{-- end of delete idea modal --}}
     @endcan
 
-    <livewire:mark-idea-as-spam :idea="$idea" />
-    <livewire:mark-idea-as-not-spam :idea="$idea" />
+    @auth
+        <livewire:mark-idea-as-spam :idea="$idea" />
+    @endauth
+    @admin
+        <livewire:mark-idea-as-not-spam :idea="$idea" />
+    @endadmin
 
     {{-- comments container --}}
     <div class="comments-container relative space-y-6 md:ml-[5.5rem] my-8 mt-1 pt-4">
