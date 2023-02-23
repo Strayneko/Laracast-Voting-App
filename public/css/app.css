@@ -1112,9 +1112,29 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(238 242 255 / var(--tw-bg-opacity));
 }
+.bg-theme-blue-hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(40 121 189 / var(--tw-bg-opacity));
+}
 .bg-theme-blue-primary {
   --tw-bg-opacity: 1;
   background-color: rgb(50 138 241 / var(--tw-bg-opacity));
+}
+.bg-theme-green {
+  --tw-bg-opacity: 1;
+  background-color: rgb(26 171 139 / var(--tw-bg-opacity));
+}
+.bg-theme-purple {
+  --tw-bg-opacity: 1;
+  background-color: rgb(139 96 237 / var(--tw-bg-opacity));
+}
+.bg-theme-red {
+  --tw-bg-opacity: 1;
+  background-color: rgb(236 69 79 / var(--tw-bg-opacity));
+}
+.bg-theme-yellow {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 199 60 / var(--tw-bg-opacity));
 }
 .bg-white {
   --tw-bg-opacity: 1;
@@ -1376,9 +1396,6 @@ select {
 }
 .opacity-100 {
   opacity: 1;
-}
-.mix-blend-luminosity {
-  mix-blend-mode: luminosity;
 }
 .shadow {
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
