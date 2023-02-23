@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Category;
+use App\Models\Status;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
 
@@ -13,6 +14,16 @@ class IdeaFactory extends Factory
      *
      * @return array
      */
+    public function newData()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'user_id' => User::factory(),
+                'category_id' => Category::factory(),
+                'status_id' => Status::factory(),
+            ];
+        });
+    }
     public function definition()
     {
         return [

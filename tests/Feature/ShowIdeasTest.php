@@ -20,24 +20,22 @@ class ShowIdeasTest extends TestCase
     {
 
 
-        $user = User::factory()->create();
+
         $categoryOne = Category::factory()->create(['name' => 'Category 1']);
         $categoryTwo = Category::factory()->create(['name' => 'Category 2']);
 
 
-        $statusOpen = Status::factory()->create(['name' => 'Open', 'classes' => 'bg-gray-200']);
-        $statusConsidering = Status::factory()->create(['name' => 'Considering', 'classes' => 'bg-purple text-white']);
+        $statusOpen = Status::factory()->create(['name' => 'OpenUnique']);
+        $statusConsidering = Status::factory()->create(['name' => 'ConsideringUnique',]);
 
-        $ideaOne = Idea::factory()->create([
-            'user_id' => $user->id,
+        $ideaOne = Idea::factory()->newData()->create([
             'title' => 'My First Idea',
             'status_id' => $statusOpen->id,
             'category_id' => $categoryOne->id,
             'description' => 'Description Of my first Idea',
         ]);
 
-        $ideaTwo = Idea::factory()->create([
-            'user_id' => $user->id,
+        $ideaTwo = Idea::factory()->newData()->create([
             'title' => 'My second Idea',
             'category_id' => $categoryTwo->id,
             'status_id' => $statusConsidering->id,
@@ -49,28 +47,27 @@ class ShowIdeasTest extends TestCase
         $response->assertSee($ideaOne->title);
         $response->assertSee($ideaOne->description);
         $response->assertSee($categoryOne->name);
+        $response->assertSee('OpenUnique');
         $response->assertSee($ideaTwo->title);
         $response->assertSee($ideaTwo->description);
         $response->assertSee($categoryTwo->name);
+        $response->assertSee('ConsideringUnique');
     }
 
 
     /** @test */
     public function single_idea_shows_correctly_on_the_show_page()
     {
-        $user = User::factory()->create();
 
 
         $categoryOne = Category::factory()->create(['name' => 'Category 1']);
 
-        $statusOpen = Status::factory()->create(['name' => 'Open', 'classes' => 'bg-gray-200']);
+        $statusOpen = Status::factory()->create(['name' => 'OpenUnique', 'classes' => 'bg-gray-200']);
 
-        $idea = Idea::factory()->create([
-            'user_id' => $user->id,
+        $idea = Idea::factory()->newData()->create([
             'title' => 'My First Idea',
             'status_id' => $statusOpen,
             'category_id' => $categoryOne->id,
-            'description' => 'Description Of my first Idea',
         ]);
 
 
@@ -79,6 +76,7 @@ class ShowIdeasTest extends TestCase
         $response->assertSee($idea->title);
         $response->assertSee($idea->description);
         $response->assertSee($categoryOne->name);
+        $response->assertSee('OpenUnique');
     }
 
     /** @test */

@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Category;
 use App\Models\Idea;
+use App\Models\Vote;
 use Livewire\Component;
 
 class CreateIdea extends Component
@@ -27,14 +28,14 @@ class CreateIdea extends Component
         // validate input
         $this->validate();
 
-        Idea::create([
+        $idea = Idea::create([
             'user_id' => auth()->id(),
             'category_id' => $this->category,
             'status_id' => 1,
             'title' => $this->title,
             'description' => $this->description,
         ]);
-
+        $idea->vote(auth()->user());
 
         // reset form
         $this->reset();
