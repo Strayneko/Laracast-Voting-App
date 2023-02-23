@@ -31,11 +31,10 @@
         </div>
 
         <div class="md:w-1/3 w-full">
-            <x-filter-dropdown>
-                <x-filter-dropdown-item value="Filter One" name="Filter One" />
-                <x-filter-dropdown-item value="Filter Two" name="Filter Two" />
-                <x-filter-dropdown-item value="Filter Three" name="Filter Three" />
-                <x-filter-dropdown-item value="Filter Four" name="Filter Four" />
+            <x-filter-dropdown wire:model='filter'>
+                <x-filter-dropdown-item value="No Filter" name="No Filter" />
+                <x-filter-dropdown-item value="Top Voted" name="Top Voted" />
+                <x-filter-dropdown-item value="My Ideas" name="My Ideas" />
             </x-filter-dropdown>
         </div>
 

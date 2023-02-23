@@ -15,10 +15,12 @@ class IdeasIndex extends Component
 
     public $status;
     public $category;
+    public $filter;
 
     protected $queryString = [
         'status',
         'category',
+        'filter'
     ];
     protected $listeners = ['queryStringUpdatedStatus'];
 
@@ -33,34 +35,49 @@ class IdeasIndex extends Component
 
     }
 
+    public function updatedFilter()
+    {
+        if ($this->filter === 'My Ideas' && !auth()->check()) return redirect()->route('login');
+    }
+
     public function queryStringUpdatedStatus($newStatus)
     {
         $this->resetPage(); // reset pagination page on status change
         $this->status = $newStatus;
     }
 
+
+
     public function render()
     {
-
         $statuses = Status::all()->pluck('id', 'name');
         $categories = Category::all();
 
+        // filter closure
+        $StatusFilter = fn ($query) => $query->where('status_id', $statuses->get($this->status));
+        $CategoryFilter = fn ($query) =>  $query->where('category_id', $categories->pluck('id', 'name')->get($this->category));
+
+        $OtherFilters = function ($query, $filter = 'No Filter') {
+            if ($filter === 'Top Voted') return $query->orderByDesc('votes_count');
+            if ($filter === 'My Ideas') return $query->where('user_id', auth()->user()->id);
+        };
+
+        // subquery to get vote id that voted by current authenticated user
+        $subSelect = [
+            'voted_by_user' => Vote::select('id')
+                ->where('user_id', auth()->id())
+                ->whereColumn('idea_id', 'ideas.id')
+        ];
+
+
         // get all idea
         $ideas = Idea::with(['category', 'user', 'status'])
-            ->when($this->status && $this->status !== 'All', function ($query) use ($statuses) {
-                return $query->where('status_id', $statuses->get($this->status));
-            })
-            ->when($this->category && $this->category !== 'All Categories', function ($query) use ($categories) {
-                return $query->where('category_id', $categories->pluck('id', 'name')->get($this->category));
-            })
-            // subquery to get vote id that voted by current authenticated user
-            ->addSelect([
-                'voted_by_user' => Vote::select('id')
-                    ->where('user_id', auth()->id())
-                    ->whereColumn('idea_id', 'ideas.id')
-            ])
-            // ordering from latest data / latest()
-            ->orderByDesc('id')
+            ->when($this->status && $this->status !== 'All', $StatusFilter)
+            ->when($this->category && $this->category !== 'All Categories', $CategoryFilter)
+            ->when($this->filter && $this->filter === 'Top Voted', fn ($query) => $OtherFilters($query, $this->filter))
+            ->when($this->filter && $this->filter === 'My Ideas', fn ($query) => $OtherFilters($query, $this->filter))
+            ->addSelect($subSelect)
+            ->orderByDesc('id')   // ordering from latest data / latest()
             ->withCount('votes')
             ->simplePaginate(Idea::PAGINATION_COUNT);
 
