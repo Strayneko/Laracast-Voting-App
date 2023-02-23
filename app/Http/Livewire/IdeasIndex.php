@@ -16,11 +16,13 @@ class IdeasIndex extends Component
     public $status;
     public $category;
     public $filter;
+    public $search;
 
     protected $queryString = [
         'status',
         'category',
-        'filter'
+        'filter',
+        'search'
     ];
     protected $listeners = ['queryStringUpdatedStatus'];
 
@@ -30,6 +32,18 @@ class IdeasIndex extends Component
     }
 
     public function updatingCategory()
+    {
+        $this->resetPage(); // reset pagination page on category change
+
+    }
+
+    public function updatingSearch()
+    {
+
+        $this->resetPage(); // reset pagination page on category change
+
+    }
+    public function updatingFilter()
     {
         $this->resetPage(); // reset pagination page on category change
 
@@ -62,6 +76,7 @@ class IdeasIndex extends Component
             if ($filter === 'My Ideas') return $query->where('user_id', auth()->user()->id);
         };
 
+        $Search = fn ($query) => $query->where('title', 'like', '%' . $this->search . '%');
         // subquery to get vote id that voted by current authenticated user
         $subSelect = [
             'voted_by_user' => Vote::select('id')
@@ -76,6 +91,7 @@ class IdeasIndex extends Component
             ->when($this->category && $this->category !== 'All Categories', $CategoryFilter)
             ->when($this->filter && $this->filter === 'Top Voted', fn ($query) => $OtherFilters($query, $this->filter))
             ->when($this->filter && $this->filter === 'My Ideas', fn ($query) => $OtherFilters($query, $this->filter))
+            ->when(strlen($this->search) >= 3, $Search)
             ->addSelect($subSelect)
             ->orderByDesc('id')   // ordering from latest data / latest()
             ->withCount('votes')

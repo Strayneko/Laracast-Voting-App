@@ -40,7 +40,7 @@
 
         {{-- search form --}}
         <div class="md:w-2/3 relative w-full">
-            <input type="search" placeholder="Find an idea"
+            <input wire:model="search" type="search" placeholder="Find an idea"
                 class="w-full rounded-xl bg-white border-none placeholder:text-gray-900 px-4 py-2 pl-8">
             <div class="absolute top-0 flex itmes-center h-full ml-2">
                 <svg class="w-4 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -56,11 +56,17 @@
     {{-- ideas container --}}
     <div class="ideas-container space-y-6 my-6">
 
-        @foreach ($ideas as $idea)
+        @forelse ($ideas as $idea)
             {{-- idea container --}}
             <livewire:idea-index :key="$idea->id" :idea="$idea" :votesCount="$idea->votes_count" />
             {{-- end of idea container --}}
-        @endforeach
+        @empty
+            <div class="mx-auto w-70 mt-12">
+                <img src="{{ asset('images/no-ideas.svg') }}" alt="No Ideas" class="mx-auto"
+                    style="mix-blend-mode: luminosity">
+                <div class="text-gray-400 text-center mt-6 font-bold">No Ideas were found...</div>
+            </div>
+        @endforelse
 
 
     </div>
