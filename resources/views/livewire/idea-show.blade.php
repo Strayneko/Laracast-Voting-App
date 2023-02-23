@@ -53,6 +53,7 @@
                                 class="absolute  w-44 font-semibold bg-white shadow-dialog text-left rounded-xl py-3 md:ml-8 top-8 md:top-6 right-0 md:left-0 z-10">
                                 <li>
                                     <a href=""
+                                        @click.prevent="isOpen = false, $dispatch('custom-show-edit-modal')"
                                         class="hover:bg-gray-100 block px-5 py-3 transition duration-150 ease-in">
                                         Edit Idea
                                     </a>
