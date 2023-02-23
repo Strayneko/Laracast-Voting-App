@@ -2,10 +2,8 @@
     <ul class="flex uppercase font-semibold border-b-4 pb-3 space-x-10">
         <li>
             <a wire:click.prevent="setStatus('All')" href="#"
-                class="border-b-4 pb-3 hover:border-theme-blue-primary text-gray-400  @if ($status === 'All') border-theme-blue-primary text-gray-900 @endif">
-                All
-                Ideas ({{ $status_count['all_statuses'] }})
-            </a>
+                class="border-b-4 pb-3 hover:border-theme-blue-primary text-gray-400  @if ($status === 'All') border-theme-blue-primary text-gray-900 @endif">All
+                Ideas ({{ $status_count['all_statuses'] }})</a>
         </li>
         <li>
             <a wire:click.prevent="setStatus('Considering')" href="#"
