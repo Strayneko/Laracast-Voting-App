@@ -12,12 +12,10 @@ class CreateIdea extends Component
     public $title;
     public $category = 1;
     public $description;
-
     protected $rules = [
         'title' => 'required|min:4',
         'description' => 'required|min:4',
-        'category' => 'required|integer',
-
+        'category' => 'required|integer|exists:categories,id',
     ];
 
     public function createIdea()

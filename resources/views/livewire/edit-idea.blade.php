@@ -1,6 +1,8 @@
-<div x-cloak x-data="{ isOpen: false }" @custom-show-edit-modal.window="isOpen = true" x-transition x-show="isOpen"
-    @keydown.escape.window="isOpen = false" class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title"
-    role="dialog" aria-modal="true">
+<div x-cloak x-data="{ isOpen: false }" x-init="window.livewire.on('ideaWasUpdated', () => {
+    isOpen = false
+})" @custom-show-edit-modal.window="isOpen = true" x-transition
+    x-show="isOpen" @keydown.escape.window="isOpen = false" class="fixed z-10 inset-0 overflow-y-auto"
+    aria-labelledby="modal-title" role="dialog" aria-modal="true">
     <div class="flex items-end justify-center min-h-screen">
         <!--
       Background overlay, show/hide based on modal state.
@@ -39,7 +41,7 @@
                 <p class="text-xs text-center leading-5 text-gray-500 px-6 mt-4">You have one hour to edit your idea
                     from the time you created it.</p>
 
-                <form wire:submit.prevent="createIdea" action="#" method="POST" class="space-y-4 px-4 py-6">
+                <form wire:submit.prevent="updateIdea" action="#" method="POST" class="space-y-4 px-4 py-6">
                     <div>
                         <input wire:model.defer="title" type="text"
                             class="w-full text-sm bg-gray-100 border-none rounded-xl placeholder-gray-900 px-4 py-2"
@@ -52,7 +54,9 @@
                         <select wire:model.defer="category" name="category_add" id="category_add"
                             class="w-full bg-gray-100 text-sm rounded-xl border-none px-4 py-2">
 
-                            <option value="1">Category 1</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                     @error('category')
@@ -78,7 +82,7 @@
                         </button>
                         <button type="submit"
                             class="flex items-center justify-center w-1/2 h-11 text-xs bg-theme-blue-primary text-white font-semibold rounded-xl border border-blue hover:bg-theme-blue-hover transition duration-150 ease-in px-6 py-3">
-                            <span class="ml-1">Submit</span>
+                            <span class="ml-1">Update</span>
                         </button>
                     </div>
                 </form>
