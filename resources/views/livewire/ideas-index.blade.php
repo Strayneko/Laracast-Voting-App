@@ -22,11 +22,11 @@
     <div class="filters flex space-y-2 md:space-y-0 md:space-x-6 flex-col md:flex-row">
 
         <div class="md:w-1/3 w-full">
-            <x-filter-dropdown name="percobaan">
-                <x-filter-dropdown-item value="Category One" name="Category One" />
-                <x-filter-dropdown-item value="Category Two" name="Category Two" />
-                <x-filter-dropdown-item value="Category Three" name="Category Three" />
-                <x-filter-dropdown-item value="Category Four" name="Category Four" />
+            <x-filter-dropdown wire:model='category'>
+                <x-filter-dropdown-item value="All Categories" name="All Categories" />
+                @foreach ($categories as $category)
+                    <x-filter-dropdown-item value="{{ $category->name }}" name="{{ $category->name }}" />
+                @endforeach
             </x-filter-dropdown>
         </div>
 

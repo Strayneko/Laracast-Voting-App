@@ -9,18 +9,14 @@ use Illuminate\Support\Facades\Route;
 
 class StatusFilters extends Component
 {
-    public $status = 'All';
+    public $status;
     public $status_count;
-
-    protected $queryString = [
-        'status',
-    ];
 
 
     public function mount()
     {
         $this->status_count = Status::getCount();
-
+        $this->status = request()->status ?? 'All';
 
         if (Route::currentRouteName() === 'idea.show') {
             $this->status = null;
@@ -32,13 +28,14 @@ class StatusFilters extends Component
     {
 
         $this->status = $status;
+        $this->emit('queryStringUpdatedStatus', $this->status);
 
         // only redirect page in show page
-        // if ($this->getPreviousRouteName() === 'idea.show') {
-        return redirect()->route('idea.index', [
-            'status' => $this->status,
-        ]);
-        // }
+        if ($this->getPreviousRouteName() === 'idea.show') {
+            return redirect()->route('idea.index', [
+                'status' => $this->status,
+            ]);
+        }
     }
 
     private function getPreviousRouteName()
