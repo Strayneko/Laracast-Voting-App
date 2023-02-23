@@ -14,6 +14,10 @@
     <livewire:idea-show :idea="$idea" :votesCount="$votesCount" />
     {{-- end ofidea container and button container --}}
 
+    {{-- messages --}}
+    <x-notification-success />
+    {{-- end of messages --}}
+
     <x-modals-container :idea="$idea" />
 
     {{-- comments container --}}
