@@ -20,6 +20,12 @@
         {{-- end of edit idea modal --}}
     @endcan
 
+    @can('delete', $idea)
+        {{-- delete idea modal --}}
+        <livewire:delete-idea :idea="$idea" />
+        {{-- end of delete idea modal --}}
+    @endcan
+
     {{-- comments container --}}
     <div class="comments-container relative space-y-6 md:ml-[5.5rem] my-8 mt-1 pt-4">
 

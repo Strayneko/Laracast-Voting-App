@@ -1,8 +1,9 @@
 <div x-cloak x-data="{ isOpen: false }" x-init="window.livewire.on('ideaWasUpdated', () => {
     isOpen = false
-})" @custom-show-edit-modal.window="isOpen = true" x-transition
-    x-show="isOpen" @keydown.escape.window="isOpen = false" class="fixed z-10 inset-0 overflow-y-auto"
-    aria-labelledby="modal-title" role="dialog" aria-modal="true">
+})"
+    @custom-show-edit-modal.window="isOpen = true, $nextTick(() => $refs.title.focus())" x-transition x-show="isOpen"
+    @keydown.escape.window="isOpen = false" class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title"
+    role="dialog" aria-modal="true">
     <div class="flex items-end justify-center min-h-screen">
         <!--
       Background overlay, show/hide based on modal state.
@@ -43,7 +44,7 @@
 
                 <form wire:submit.prevent="updateIdea" action="#" method="POST" class="space-y-4 px-4 py-6">
                     <div>
-                        <input wire:model.defer="title" type="text"
+                        <input x-ref="title" wire:model.defer="title" type="text"
                             class="w-full text-sm bg-gray-100 border-none rounded-xl placeholder-gray-900 px-4 py-2"
                             placeholder="Your Idea" required>
                         @error('title')

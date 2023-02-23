@@ -67,10 +67,13 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href=""
-                                        class="hover:bg-gray-100 block px-5 py-3 transition duration-150 ease-in">
-                                        Delete Idea
-                                    </a>
+                                    @can('delete', $idea)
+                                        <a href=""
+                                            @click.prevent="isOpen = false, $dispatch('custom-show-delete-modal')"
+                                            class="hover:bg-gray-100 block px-5 py-3 transition duration-150 ease-in">
+                                            Delete Idea
+                                        </a>
+                                    @endcan
                                 </li>
                             </ul>
                             {{-- end of dialog --}}
