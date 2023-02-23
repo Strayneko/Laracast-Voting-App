@@ -19,7 +19,7 @@ class DeleteIdea extends Component
         if (auth()->guest() || auth()->user()->cannot('delete', $this->idea)) abort(403);
         Vote::where('idea_id', $this->idea->id)->delete();
         Idea::destroy($this->idea->id);
-        return redirect()->route('idea.index');
+        return redirect()->route('idea.index')->with('success_message', 'Idea was deleted successfully!');
     }
     public function render()
     {

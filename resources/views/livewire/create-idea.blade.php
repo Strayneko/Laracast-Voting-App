@@ -50,7 +50,7 @@
 
 
         </div>
-        <div>
+        {{-- <div>
             @if (session()->has('success_message'))
                 <div x-data="{ isVisible: true }" x-init="setTimeout(() => {
                     isVisible = false
@@ -59,6 +59,6 @@
                     {{ session()->get('success_message') }}
                 </div>
             @endif
-        </div>
+        </div> --}}
     </form>
 </div>

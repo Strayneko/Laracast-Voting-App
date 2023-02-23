@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Jobs\NotifyAllVoters;
 use App\Models\Idea;
+use App\Models\Status;
 use Livewire\Component;
 
 class SetStatus extends Component
@@ -25,7 +26,7 @@ class SetStatus extends Component
         $this->idea->status_id = $this->status;
         $this->idea->save();
 
-        $this->emit('statusWasUpdated');
+        $this->emit('statusWasUpdated', 'Status was changed to ' . Status::find($this->status)->name);
 
         if ($this->notifyAllVoters) {
             NotifyAllVoters::dispatch($this->idea);

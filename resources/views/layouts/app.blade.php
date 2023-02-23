@@ -12,14 +12,15 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <livewire:styles />
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 
-<body class="font-sans bg-gray-background text-gray-900 text-sm">
+<body class="font-sans bg-gray-background text-gray-900 text-sm ">
+    <div class="hidden bg-theme-red bg-theme-purple bg-theme-yellow bg-theme-green "></div>
     <header class="flex flex-col md:flex-row items-center justify-between px-8 py-4">
         <a href="">
             <img src="{{ asset('images/logo.svg') }}" alt="Laracast Logo">
@@ -98,6 +99,11 @@
 
 
     </main>
+
+    @if (session()->has('success_message'))
+        <x-notification-success :redirect="true" message-to-display="{{ session('success_message') }}" />
+    @endif
+
 
     {{-- livewire scripts --}}
     <livewire:scripts />
