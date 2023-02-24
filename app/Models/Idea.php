@@ -41,6 +41,12 @@ class Idea extends Model
         return $this->belongsTo(Category::class);
     }
 
+    // relation to comment model
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     // relation to status model
     public function status()
     {

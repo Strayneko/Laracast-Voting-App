@@ -48,6 +48,12 @@ class User extends Authenticatable
         return $this->hasMany(Idea::class);
     }
 
+    // relation to comment model
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
 
     public function getAvatar(): string
     {

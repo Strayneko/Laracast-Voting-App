@@ -97,6 +97,7 @@ class IdeasIndex extends Component
             ->addSelect($subSelect)
             ->orderByDesc('id')   // ordering from latest data / latest()
             ->withCount('votes')
+            ->withCount('comments')
             ->simplePaginate(Idea::PAGINATION_COUNT);
 
         return view('livewire.ideas-index', [
