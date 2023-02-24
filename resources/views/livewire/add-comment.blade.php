@@ -1,20 +1,34 @@
 <div class="relative" x-data="{ isOpen: false }" @keydown.escape.window="isOpen = false" x-init="Livewire.on('commentWasAdded', () => {
+    Livewire.hook('message.processed', (message, component) => {
+        {{-- get the last element of comment --}}
+        if (message.updateQueue[0].payload.event === 'commentWasAdded' && message.component.fingerprint.name == 'idea-comments') {
+            const lastComment = document.querySelector('.comment-container:last-child')
+            {{-- scroll into the element --}}
+            lastComment.scrollIntoView({ behavior: 'smooth' })
+            lastComment.classList.add('bg-green-50')
+            setTimeout(() => {
+                lastComment.classList.remove('bg-green-50')
+            }, 5000)
+        }
+    })
     isOpen = false
 })">
 
-    <button @click="isOpen = !isOpen" type="button"
+    <button @click="isOpen = !isOpen
+    if(isOpen) $nextTick(() => $refs.comment.focus())
+    " type="button"
         class="flex items-center w-36 justify-center  h-9 text-xs bg-theme-blue-primary font-semibold rounded-xl border border-theme-blue-primary text-white hover:border-theme-blue-hover hover:bg-theme-blue-hover transition duration-150 ease-in px-6 py-3">
         <span class="">Reply</span>
     </button>
 
     <div x-cloak x-show="isOpen" x-transition.origin.top.left @click.away="isOpen = false"
         @keydown.escape.window="isOpen = false"
-        class="absolute z-10 bg-white shadow-dialog rounded-xl mt-2 w-64 md:w-[26rem] text-left font-semibold text-sm">
+        class="absolute z-10 bg-white  shadow-dialog rounded-xl mt-2 w-64 md:w-[26rem] text-left font-semibold text-sm">
 
         @auth
             <form action="" wire:submit.prevent='addComment' class="space-y-4 px-4 py-6">
                 <div>
-                    <textarea wire:model='comment' name="post_comment" id="post_comment" cols="30" rows="4"
+                    <textarea x-ref="comment" wire:model='comment' name="post_comment" id="post_comment" cols="30" rows="4"
                         class="w-full md:text-sm text-xs rounded-xl bg-gray-100 md:placeholder:text-gray-900 border-none px-4 py-2"
                         placeholder="Go ahead, don't be shy. Share your thoughs..." required></textarea>
 
