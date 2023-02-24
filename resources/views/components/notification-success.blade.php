@@ -24,6 +24,9 @@
      Livewire.on('statusWasUpdated', (message) => {
          showNotification(message)
      })
+     Livewire.on('commentWasAdded', (message) => {
+         showNotification(message)
+     })
      @endif"
      class="flex z-20 justify-between max-w-xs md:max-w-sm w-full fixed bottom-0 right-0 bg-white
      rounded-xl shadow-lg border px-6 py-4 mx-2 sm:mx-6 my-8">

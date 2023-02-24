@@ -20,6 +20,12 @@
                     <div class="flex items-center text-xs font-semibold space-x-2 text-gray-400">
                         <div class="font-bold text-gray-900">{{ $comment->user->name }}</div>
                         <div>&bull;</div>
+                        @if ($comment->user->id == $ideaUserId)
+                            <div class="rounded-full border bg-gray-100 px-3 py-1">
+                                Op
+                            </div>
+                            <div>&bull;</div>
+                        @endif
                         <time>{{ $comment->created_at->diffForHumans() }}</time>
 
                     </div>

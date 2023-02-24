@@ -4,7 +4,7 @@
 
             {{-- comment container --}}
             @forelse ($comments as $comment)
-                <livewire:idea-comment :key="$comment->id" :comment="$comment" />
+                <livewire:idea-comment :key="$comment->id" :comment="$comment" :ideaUserId="$idea->user->id" />
             @endforeach
             {{-- end of comment container --}}
         </div>
