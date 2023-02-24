@@ -6,7 +6,13 @@
             @forelse ($comments as $comment)
                 <livewire:idea-comment :key="$comment->id" :comment="$comment" :ideaUserId="$idea->user->id" />
             @endforeach
+
+
             {{-- end of comment container --}}
+        </div>
+
+        <div class="my-8 md:ml-[5.5rem]">
+            {{ $comments->onEachSide(1)->links() }}
         </div>
     @else
         <div class="mx-auto w-70 mt-12">

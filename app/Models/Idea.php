@@ -13,6 +13,7 @@ class Idea extends Model
 {
     use HasFactory, Sluggable;
 
+    protected $perPage = 10;
     const PAGINATION_COUNT = 10;
 
     protected $guarded = ['id'];

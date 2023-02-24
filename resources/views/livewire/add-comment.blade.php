@@ -1,17 +1,23 @@
 <div class="relative" x-data="{ isOpen: false }" @keydown.escape.window="isOpen = false" x-init="Livewire.on('commentWasAdded', () => {
-    Livewire.hook('message.processed', (message, component) => {
-        {{-- get the last element of comment --}}
-        if (message.updateQueue[0].payload.event === 'commentWasAdded' && message.component.fingerprint.name == 'idea-comments') {
-            const lastComment = document.querySelector('.comment-container:last-child')
-            {{-- scroll into the element --}}
-            lastComment.scrollIntoView({ behavior: 'smooth' })
-            lastComment.classList.add('bg-green-50')
-            setTimeout(() => {
-                lastComment.classList.remove('bg-green-50')
-            }, 5000)
-        }
-    })
     isOpen = false
+})
+
+Livewire.hook('message.processed', (message, component) => {
+    {{-- scroll to first element when sue pagination --}}
+    if (['gotoPage', 'previousPage', 'nextPage'].includes(message.updateQueue[0].method)) {
+        const firstComment = document.querySelector('.comment-container:first-child')
+        firstComment.scrollIntoView({ behavior: 'smooth' })
+    }
+    {{-- get the last element of comment --}}
+    if (message.updateQueue[0].payload.event === 'commentWasAdded' && message.component.fingerprint.name == 'idea-comments') {
+        const lastComment = document.querySelector('.comment-container:last-child')
+        {{-- scroll into the element --}}
+        lastComment.scrollIntoView({ behavior: 'smooth' })
+        lastComment.classList.add('bg-green-50')
+        setTimeout(() => {
+            lastComment.classList.remove('bg-green-50')
+        }, 5000)
+    }
 })">
 
     <button @click="isOpen = !isOpen

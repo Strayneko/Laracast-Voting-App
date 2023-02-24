@@ -78,9 +78,9 @@
 
     {{-- pagination --}}
     <div class="my-8">
-        {{-- {{ $ideas->links() }} --}}
-        {{-- append query string --}}
-        {{ $ideas->appends(request()->query())->links() }}
+        {{ $ideas->links() }}
+        {{-- append query string
+        {{ $ideas->appends(request()->query())->links() }} --}}
     </div>
     {{-- end of pagination --}}
 </div>
