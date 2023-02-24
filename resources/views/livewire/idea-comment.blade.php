@@ -31,39 +31,49 @@
                     </div>
 
 
-                    <div class="flex items-center space-x-2" x-data="{ isOpen: false }">
-                        <div class="relative">
-                            <button @click="isOpen = !isOpen"
-                                class="bg-gray-100 border hover:bg-gray-200 rounded-full h-7 transition duration-150 ease-in py-2 px-3 relative">
-                                <svg fill="currentColor" width="24" height="6">
-                                    <path
-                                        d="M2.97.061A2.969 2.969 0 000 3.031 2.968 2.968 0 002.97 6a2.97 2.97 0 100-5.94zm9.184 0a2.97 2.97 0 100 5.939 2.97 2.97 0 100-5.939zm8.877 0a2.97 2.97 0 10-.003 5.94A2.97 2.97 0 0021.03.06z"
-                                        style="color: rgba(163, 163, 163, .5)">
-                                </svg>
+                    @auth
+                        <div class="flex items-center space-x-2" x-data="{ isOpen: false }">
+                            <div class="relative">
+                                <button @click="isOpen = !isOpen"
+                                    class="bg-gray-100 border hover:bg-gray-200 rounded-full h-7 transition duration-150 ease-in py-2 px-3 relative">
+                                    <svg fill="currentColor" width="24" height="6">
+                                        <path
+                                            d="M2.97.061A2.969 2.969 0 000 3.031 2.968 2.968 0 002.97 6a2.97 2.97 0 100-5.94zm9.184 0a2.97 2.97 0 100 5.939 2.97 2.97 0 100-5.939zm8.877 0a2.97 2.97 0 10-.003 5.94A2.97 2.97 0 0021.03.06z"
+                                            style="color: rgba(163, 163, 163, .5)">
+                                    </svg>
 
-                            </button>
+                                </button>
 
-                            {{-- dialog --}}
-                            <ul x-cloak x-show="isOpen" x-transition.origin.top.left @click.away="isOpen = false"
-                                @keydown.escape.window="isOpen = false"
-                                class="absolute z-10 w-44 font-semibold bg-white shadow-dialog text-left rounded-xl py-3 md:ml-8 top-8 md:top-6 right-0 md:left-0">
-                                <li>
-                                    <a href=""
-                                        class="hover:bg-gray-100 block px-5 py-3 transition duration-150 ease-in">
-                                        Mark as spam
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href=""
-                                        class="hover:bg-gray-100 block px-5 py-3 transition duration-150 ease-in">
-                                        Delete post
-                                    </a>
-                                </li>
-                            </ul>
-                            {{-- end of dialog --}}
+                                {{-- dialog --}}
+                                <ul x-cloak x-show="isOpen" x-transition.origin.top.left @click.away="isOpen = false"
+                                    @keydown.escape.window="isOpen = false"
+                                    class="absolute z-10 w-44 font-semibold bg-white shadow-dialog text-left rounded-xl py-3 md:ml-8 top-8 md:top-6 right-0 md:left-0">
+                                    @can('update', $comment)
+                                        <li>
+                                            <a href=""
+                                                @click.prevent="isOpen = false, Livewire.emit('setEditComment', {{ $comment->id }})"
+                                                class="hover:bg-gray-100 block px-5 py-3 transition duration-150 ease-in">
+                                                Edit Comment
+                                            </a>
+                                        </li>
+                                    @endcan
+                                    <li>
+                                        <a href=""
+                                            class="hover:bg-gray-100 block px-5 py-3 transition duration-150 ease-in">
+                                            Mark as spam
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href=""
+                                            class="hover:bg-gray-100 block px-5 py-3 transition duration-150 ease-in">
+                                            Delete post
+                                        </a>
+                                    </li>
+                                </ul>
+                                {{-- end of dialog --}}
+                            </div>
                         </div>
-                    </div>
-
+                    @endauth
 
                 </div>
             </div>

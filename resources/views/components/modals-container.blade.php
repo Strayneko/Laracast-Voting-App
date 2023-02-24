@@ -19,4 +19,10 @@
     @admin
         <livewire:mark-idea-as-not-spam :idea="$idea" />
     @endadmin
+
+    @auth
+        {{-- edit idea modal --}}
+        <livewire:edit-comment />
+        {{-- end of edit idea modal --}}
+    @endauth
 </div>
