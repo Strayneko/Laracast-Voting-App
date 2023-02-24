@@ -14,11 +14,12 @@ class IdeaShow extends Component
     public $hasVoted;
 
     protected $listeners = [
-        'statusWasUpdated',
-        'ideaWasUpdated',
-        'ideaWasMarkedAsSpam',
-        'ideaWasMarkedAsNotSpam',
-        'commentWasAdded',
+        'statusWasUpdated' => 'refresh',
+        'ideaWasUpdated' => 'refresh',
+        'ideaWasMarkedAsSpam' => 'refresh',
+        'ideaWasMarkedAsNotSpam' => 'refresh',
+        'commentWasAdded' => 'refresh',
+        'commentWasDeleted' => 'refresh',
     ];
 
     public function mount(Idea $idea, $votesCount)
@@ -56,27 +57,12 @@ class IdeaShow extends Component
         }
     }
 
-    public function statusWasUpdated()
-    {
-        $this->idea->refresh();
-    }
-    public function ideaWasMarkedAsSpam()
-    {
-        $this->idea->refresh();
-    }
-    public function ideaWasMarkedAsNotSpam()
-    {
-        $this->idea->refresh();
-    }
-    public function commentWasAdded()
+
+    public function refresh()
     {
         $this->idea->refresh();
     }
 
-    public function ideaWasUpdated()
-    {
-        $this->idea->refresh();
-    }
 
     public function render()
     {

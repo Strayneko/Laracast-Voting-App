@@ -25,4 +25,9 @@
         <livewire:edit-comment />
         {{-- end of edit idea modal --}}
     @endauth
+    @auth
+        {{-- delete comment modal --}}
+        <livewire:delete-comment />
+        {{-- end of delete comment modal --}}
+    @endauth
 </div>
