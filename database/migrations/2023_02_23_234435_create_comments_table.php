@@ -18,6 +18,7 @@ class CreateCommentsTable extends Migration
             $table->foreignId('user_id');
             $table->foreignId('idea_id');
             $table->text('body');
+            $table->integer('spam_reports')->default(0);
             $table->timestamps();
         });
     }

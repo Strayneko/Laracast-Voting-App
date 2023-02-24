@@ -39,6 +39,9 @@
                 @admin
                     <x-filter-dropdown-item value="Spam Ideas" name="Spam Ideas" />
                 @endadmin
+                @admin
+                    <x-filter-dropdown-item value="Spam Comments" name="Spam Comments" />
+                @endadmin
             </x-filter-dropdown>
         </div>
 

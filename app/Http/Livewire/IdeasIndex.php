@@ -75,6 +75,7 @@ class IdeasIndex extends Component
             if ($filter === 'Top Voted') return $query->orderByDesc('votes_count');
             if ($filter === 'My Ideas') return $query->where('user_id', auth()->user()->id);
             if ($filter === 'Spam Ideas') return $query->where('spam_reports', '>', 0)->orderByDesc('spam_reports');
+            if ($filter === 'Spam Comments') return $query->whereHas('comments', fn ($query) => $query->where('spam_reports', '>', 0));
         };
 
         $Search = fn ($query) => $query->where('title', 'like', '%' . $this->search . '%');
@@ -93,6 +94,7 @@ class IdeasIndex extends Component
             ->when($this->filter && $this->filter === 'Top Voted', fn ($query) => $OtherFilters($query, $this->filter))
             ->when($this->filter && $this->filter === 'My Ideas', fn ($query) => $OtherFilters($query, $this->filter))
             ->when($this->filter && $this->filter === 'Spam Ideas', fn ($query) => $OtherFilters($query, $this->filter))
+            ->when($this->filter && $this->filter === 'Spam Comments', fn ($query) => $OtherFilters($query, $this->filter))
             ->when(strlen($this->search) >= 3, $Search)
             ->addSelect($subSelect)
             ->orderByDesc('id')   // ordering from latest data / latest()

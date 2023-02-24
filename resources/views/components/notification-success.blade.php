@@ -33,6 +33,12 @@
      Livewire.on('commentWasDeleted', (message) => {
          showNotification(message)
      })
+     Livewire.on('commentWasMarkedAsSpam', (message) => {
+         showNotification(message)
+     })
+     Livewire.on('commentWasMarkedAsNotSpam', (message) => {
+         showNotification(message)
+     })
      @endif"
      class="flex z-20 justify-between max-w-xs md:max-w-sm w-full fixed bottom-0 right-0 bg-white
      rounded-xl shadow-lg border px-6 py-4 mx-2 sm:mx-6 my-8">

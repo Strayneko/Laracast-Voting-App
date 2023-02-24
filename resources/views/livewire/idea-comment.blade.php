@@ -13,6 +13,11 @@
                     </h4> --}}
 
                 <div class="text-gray-600 line-clamp-3">
+                    @admin
+                        @if ($comment->spam_reports > 0)
+                            <div class="text-theme-red mb-2">Spam Reports: {{ $comment->spam_reports }}</div>
+                        @endif
+                    @endadmin
                     {{ $comment->body }}
                 </div>
 
@@ -66,13 +71,32 @@
                                         </a>
                                     </li>
                                     @endcan
-
+                                    @auth
                                     <li>
                                         <a href=""
+                                            @click.prevent="isOpen = false, Livewire.emit('setMarkAsSpamComment', {{ $comment->id }})"
                                             class="hover:bg-gray-100 block px-5 py-3 transition duration-150 ease-in">
-                                            Mark as spam
+                                            Mark as Spam
                                         </a>
                                     </li>
+                                    @endauth
+
+                                @admin
+                                @if ($comment->spam_reports > 0)
+                                <li>
+                                    <a
+                                        href="#"
+                                        @click.prevent="
+                                            isOpen = false
+                                            Livewire.emit('setMarkAsNotSpamComment', {{ $comment->id }})
+                                        "
+                                        class="hover:bg-gray-100 block transition duration-150 ease-in px-5 py-3"
+                                    >
+                                        Not Spam
+                                    </a>
+                                </li>
+                                @endif
+                            @endadmin
                                 </ul>
                                 {{-- end of dialog --}}
                             </div>
