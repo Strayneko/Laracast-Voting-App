@@ -683,6 +683,18 @@ select {
   bottom: 0px;
   left: 0px;
 }
+.-right-1 {
+  right: -0.25rem;
+}
+.-right-24 {
+  right: -6rem;
+}
+.-right-32 {
+  right: -8rem;
+}
+.-top-1 {
+  top: -0.25rem;
+}
 .bottom-0 {
   bottom: 0px;
 }
@@ -917,6 +929,9 @@ select {
 .w-\[17\.5rem\] {
   width: 17.5rem;
 }
+.w-\[320px\] {
+  width: 320px;
+}
 .w-auto {
   width: auto;
 }
@@ -1033,6 +1048,11 @@ select {
   --tw-space-x-reverse: 0;
   margin-right: calc(0.75rem * var(--tw-space-x-reverse));
   margin-left: calc(0.75rem * calc(1 - var(--tw-space-x-reverse)));
+}
+.space-x-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(1rem * var(--tw-space-x-reverse));
+  margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
 }
 .space-x-8 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
@@ -1589,6 +1609,12 @@ select {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
+}
+.line-clamp-6 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
 }
 
 /* gradient border */
@@ -2154,6 +2180,10 @@ select {
     position: sticky;
   }
 
+  .md\:-right-12 {
+    right: -3rem;
+  }
+
   .md\:left-0 {
     left: 0px;
   }
@@ -2223,6 +2253,10 @@ select {
 
   .md\:w-2\/3 {
     width: 66.666667%;
+  }
+
+  .md\:w-96 {
+    width: 24rem;
   }
 
   .md\:w-\[19rem\] {
