@@ -9,7 +9,7 @@ Livewire.hook('message.processed', (message, component) => {
         firstComment.scrollIntoView({ behavior: 'smooth' })
     }
     {{-- get the last element of comment --}}
-    if (message.updateQueue[0].payload.event === 'commentWasAdded' && message.component.fingerprint.name == 'idea-comments') {
+    if (['commentWasAdded', 'statusWasUpdated'].includes(message.updateQueue[0].payload.event) && message.component.fingerprint.name == 'idea-comments') {
         const lastComment = document.querySelector('.comment-container:last-child')
         {{-- scroll into the element --}}
         lastComment.scrollIntoView({ behavior: 'smooth' })

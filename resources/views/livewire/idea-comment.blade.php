@@ -48,7 +48,7 @@
 
 
                     @auth
-                        <div class="flex items-center space-x-2" x-data="{ isOpen: false }">
+                        <div class="flex items-center space-x-2 text-gray-900" x-data="{ isOpen: false }">
                             <div class="relative">
                                 <button @click="isOpen = !isOpen"
                                     class="bg-gray-100 border hover:bg-gray-200 rounded-full h-7 transition duration-150 ease-in py-2 px-3 relative">

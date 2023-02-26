@@ -1614,7 +1614,7 @@ select {
     position: absolute;
     display: block;
     top: 0;
-    left: -40px;
+    left: -39px;
     content: "";
     width: 3px;
     height: 100%;
@@ -1638,7 +1638,7 @@ select {
     position: absolute;
     display: block;
     top: 60px;
-    left: -40px;
+    left: -39px;
     content: "";
     width: 3px;
     height: calc(100% - 60px);
