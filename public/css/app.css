@@ -686,8 +686,8 @@ select {
 .-right-1 {
   right: -0.25rem;
 }
-.-right-32 {
-  right: -8rem;
+.-right-28 {
+  right: -7rem;
 }
 .-top-1 {
   top: -0.25rem;
@@ -905,6 +905,9 @@ select {
 .w-4 {
   width: 1rem;
 }
+.w-40 {
+  width: 10rem;
+}
 .w-44 {
   width: 11rem;
 }
@@ -925,9 +928,6 @@ select {
 }
 .w-\[17\.5rem\] {
   width: 17.5rem;
-}
-.w-\[320px\] {
-  width: 320px;
 }
 .w-auto {
   width: auto;
@@ -992,6 +992,15 @@ select {
 }
 .transform {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+@keyframes pulse {
+
+  50% {
+    opacity: .5;
+  }
+}
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 .cursor-default {
   cursor: default;
@@ -2185,10 +2194,6 @@ select {
     left: 0px;
   }
 
-  .md\:top-10 {
-    top: 2.5rem;
-  }
-
   .md\:top-6 {
     top: 1.5rem;
   }
@@ -2230,10 +2235,6 @@ select {
 
   .md\:mt-0 {
     margin-top: 0px;
-  }
-
-  .md\:mt-20 {
-    margin-top: 5rem;
   }
 
   .md\:block {

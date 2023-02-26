@@ -7,13 +7,18 @@
             <path
                 d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
         </svg>
+
+        @if($notificationCount > 0)
         <div
             class="absolute rounded-full bg-theme-red text-white text-xxs w-6 h-6 flex justify-center items-center border-2 -top-1 -right-1">
-            8</div>
+            {{ $notificationCount }}
+        </div>
+        @endif
     </button>
     <ul class="absolute w-76 md:w-96 text-left text-gray-700 text-sm bg-white shadow-dialog rounded-xl max-h-128 overflow-y-auto z-10 -right-28 md:-right-12"
         {{-- style="right: -46px" --}} x-cloak x-show.transition.origin.top="isOpen" @click.away="isOpen = false"
         @keydown.escape.window="isOpen = false">
+        @if($notifications->isNotEmpty() && !$isLoading)
         @foreach ($notifications as $notification)
         <li>
             <a href="{{ route('idea.show', $notification->data['idea_slug']) }}" {{-- @click.prevent="
@@ -36,5 +41,24 @@
                 Mark all as read
             </button>
         </li>
+        @elseif ($isLoading)
+        @foreach(range(1,3) as $item)
+        <li class="items-center animate-pulse flex transition duration-150 ease-in px-5 py-3">
+            <div class="bg-gray-200 rounded-xl w-10 h-10"></div>
+            <div class="flex-1 space-y-2 ml-4">
+                <div class="bg-gray-200 w-full rounded h-4"></div>
+                <div class="bg-gray-200 w-full rounded h-4"></div>
+                <div class="bg-gray-200 w-1/2 rounded h-4"></div>
+            </div>
+        </li>
+        @endforeach
+        @else
+        <li class="mx-auto w-40 py-6">
+            <img src="{{ asset('images/no-ideas.svg') }}" alt="No Ideas" class="mx-auto"
+                style="mix-blend-mode: luminosity">
+            <div class="text-gray-400 text-center mt-6 font-bold">No Notifications were found...</div>
+        </li>
+        @endif
+
     </ul>
 </div>
