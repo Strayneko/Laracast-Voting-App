@@ -749,6 +749,9 @@ select {
 .mb-2 {
   margin-bottom: 0.5rem;
 }
+.mb-3 {
+  margin-bottom: 0.75rem;
+}
 .mb-4 {
   margin-bottom: 1rem;
 }
@@ -1566,6 +1569,9 @@ select {
 .duration-300 {
   transition-duration: 300ms;
 }
+.duration-500 {
+  transition-duration: 500ms;
+}
 .duration-75 {
   transition-duration: 75ms;
 }
@@ -1640,7 +1646,7 @@ select {
     background-color: rgb(247 248 252 / var(--tw-bg-opacity));
 }
 
-.is-admin {
+.is-status-updated {
     border-width: 1px;
     border-image-source: linear-gradient(266deg, #21c8f6 98%, #637bff -52%);
     border-image-slice: 1;
@@ -1650,7 +1656,7 @@ select {
     background-clip: content-box, border-box;
 }
 
-.is-admin::before {
+.is-status-updated::before {
     position: absolute;
     width: 38px;
     height: 38px;
@@ -1659,8 +1665,45 @@ select {
     box-shadow: 4px 4px 15px 0 rgba(36, 37, 38, 0.08);
     left: -58px;
     opacity: 1;
-    --tw-bg-opacity: 1;
-    background-color: rgb(139 96 237 / var(--tw-bg-opacity));
+    z-index: 1;
+}
+
+.status-open,
+.status-open::before {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
+}
+
+.status-considering,
+.status-considering::before {
+  --tw-bg-opacity: 1;
+  background-color: rgb(139 96 237 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.status-in-progress,
+.status-in-progress::before {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 199 60 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.status-implemented,
+.status-implemented::before {
+  --tw-bg-opacity: 1;
+  background-color: rgb(26 171 139 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.status-closed,
+.status-closed::before {
+  --tw-bg-opacity: 1;
+  background-color: rgb(236 69 79 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 [x-cloak] {
@@ -2245,6 +2288,10 @@ select {
   .md\:px-0 {
     padding-left: 0px;
     padding-right: 0px;
+  }
+
+  .md\:text-center {
+    text-align: center;
   }
 
   .md\:text-sm {

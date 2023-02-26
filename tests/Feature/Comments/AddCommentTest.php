@@ -73,6 +73,7 @@ class AddCommentTest extends TestCase
         Livewire::actingAs($user)
             ->test(AddComment::class, [
                 'idea' => $idea,
+                'status_id' => 1
             ])
             ->set('comment', 'This is my first comment')
             ->call('addComment')

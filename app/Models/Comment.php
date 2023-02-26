@@ -24,4 +24,10 @@ class Comment extends Model
     {
         return $this->belongsTo(Idea::class);
     }
+
+    // relation to status model
+    public function status()
+    {
+        return $this->belongsTo(Status::class, 'status_id');
+    }
 }

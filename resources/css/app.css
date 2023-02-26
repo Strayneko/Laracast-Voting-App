@@ -56,7 +56,7 @@
     @apply bg-gray-background;
 }
 
-.is-admin {
+.is-status-updated {
     border-width: 1px;
     border-image-source: linear-gradient(266deg, #21c8f6 98%, #637bff -52%);
     border-image-slice: 1;
@@ -66,7 +66,7 @@
     background-clip: content-box, border-box;
 }
 
-.is-admin::before {
+.is-status-updated::before {
     position: absolute;
     width: 38px;
     height: 38px;
@@ -75,7 +75,32 @@
     box-shadow: 4px 4px 15px 0 rgba(36, 37, 38, 0.08);
     left: -58px;
     opacity: 1;
-    @apply bg-theme-purple;
+    z-index: 1;
+}
+
+.status-open,
+.status-open::before {
+    @apply bg-gray-200;
+}
+
+.status-considering,
+.status-considering::before {
+    @apply bg-theme-purple text-white;
+}
+
+.status-in-progress,
+.status-in-progress::before {
+    @apply bg-theme-yellow text-white;
+}
+
+.status-implemented,
+.status-implemented::before {
+    @apply bg-theme-green text-white;
+}
+
+.status-closed,
+.status-closed::before {
+    @apply bg-theme-red text-white;
 }
 
 [x-cloak] {

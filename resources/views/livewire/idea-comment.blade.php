@@ -1,10 +1,14 @@
-    <div class="comment-container  relative mt-4  rounded-xl flex transition duration-500 ease-in">
+    <div class="comment-container @if ($comment->is_status_update) is-status-updated {{ 'status-'.Str::kebab($comment->status->name)}}@endif bg-white relative mt-4  rounded-xl flex transition duration-500 ease-in">
 
         <div class="flex flex-1 flex-col md:flex-row px-4  py-6">
             <div class="flex-shrink-0">
                 <a href="">
                     <img src="{{ $comment->user->getAvatar() }}" alt="avatar" class="w-14 h-14 rounded-xl">
                 </a>
+
+                @if ($comment->user->isAdmin())
+                    <div class="md:text-center uppercase text-theme-blue-primary text-xxs font-bold mt-1">Admin</div>
+                @endif
             </div>
 
             <div class="md:mx-4 w-full">
@@ -18,12 +22,19 @@
                             <div class="text-theme-red mb-2">Spam Reports: {{ $comment->spam_reports }}</div>
                         @endif
                     @endadmin
+
+                        @if ($comment->is_status_update)
+                            <h4 class="text-xl font-semibold mb-3">
+                                Status Changed to "{{ $comment->status->name }}"
+                            </h4>
+                        @endif
+
                     {{ $comment->body }}
                 </div>
 
                 <div class="flex items-center justify-between mt-6">
                     <div class="flex items-center text-xs font-semibold space-x-2 text-gray-400">
-                        <div class="font-bold text-gray-900">{{ $comment->user->name }}</div>
+                        <div class="font-bold text-gray-900 @if ($comment->user->isAdmin()) text-theme-blue-primary @endif">{{ $comment->user->name }}</div>
                         <div>&bull;</div>
                         @if ($comment->user->id == $ideaUserId)
                             <div class="rounded-full border bg-gray-100 px-3 py-1">

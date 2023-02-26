@@ -62,7 +62,7 @@ class ShowIdeasTest extends TestCase
 
         $categoryOne = Category::factory()->create(['name' => 'Category 1']);
 
-        $statusOpen = Status::factory()->create(['name' => 'OpenUnique', 'classes' => 'bg-gray-200']);
+        $statusOpen = Status::factory()->create(['name' => 'OpenUnique',]);
 
         $idea = Idea::factory()->newData()->create([
             'title' => 'My First Idea',
@@ -102,7 +102,7 @@ class ShowIdeasTest extends TestCase
         $user = User::factory()->create();
 
         $categoryOne = Category::factory()->create(['name' => 'Category 1']);
-        $statusOpen = Status::factory()->create(['name' => 'Open', 'classes' => 'bg-gray-200']);
+        $statusOpen = Status::factory()->create(['name' => 'Open',]);
 
         $ideaOne = Idea::factory()->create([
             'user_id' => $user->id,
@@ -141,8 +141,8 @@ class ShowIdeasTest extends TestCase
         $categoryOne = Category::factory()->create(['name' => 'Category 1']);
         $categoryTwo = Category::factory()->create(['name' => 'Category 2']);
 
-        $statusOpen = Status::factory()->create(['name' => 'Open', 'classes' => 'bg-gray-200']);
-        $statusConsidering = Status::factory()->create(['name' => 'Considering', 'classes' => 'bg-purple text-white']);
+        $statusOpen = Status::factory()->create(['name' => 'Open',]);
+        $statusConsidering = Status::factory()->create(['name' => 'Considering',]);
 
         $ideaOne = Idea::factory()->create([
             'user_id' => $user->id,
@@ -168,8 +168,8 @@ class ShowIdeasTest extends TestCase
         $categoryOne = Category::factory()->create(['name' => 'Category 1']);
         $categoryTwo = Category::factory()->create(['name' => 'Category 2']);
 
-        $statusOpen = Status::factory()->create(['name' => 'Open', 'classes' => 'bg-gray-200']);
-        $statusConsidering = Status::factory()->create(['name' => 'Considering', 'classes' => 'bg-purple text-white']);
+        $statusOpen = Status::factory()->create(['name' => 'Open',]);
+        $statusConsidering = Status::factory()->create(['name' => 'Considering',]);
 
         $ideaOne = Idea::factory()->create([
             'user_id' => $user->id,
