@@ -7,6 +7,7 @@ use App\Models\Status;
 use App\Models\Comment;
 use Livewire\Component;
 use App\Jobs\NotifyAllVoters;
+use App\Notifications\CommentAdded;
 
 class SetStatus extends Component
 {
@@ -34,13 +35,17 @@ class SetStatus extends Component
             NotifyAllVoters::dispatch($this->idea);
         }
         // add commetn
-        Comment::create([
+        $comment = Comment::create([
             'user_id' => auth()->id(),
             'idea_id' => $this->idea->id,
             'status_id' => $this->status,
             'body'    => $this->comment ?? 'No comment was added.',
             'is_status_update' => true,
         ]);
+
+        // notify the user
+        $this->idea->user->notify(new CommentAdded($comment));
+
 
         // reset form
         $this->reset('comment');
