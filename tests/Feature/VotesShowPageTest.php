@@ -45,17 +45,7 @@ class VotesShowPageTest extends TestCase
         $user = User::factory()->create();
         $userB = User::factory()->create();
 
-        $categoryOne = Category::factory()->create(['name' => 'Category 1']);
-
-        $statusOpen = Status::factory()->create(['name' => 'Open',]);
-
-        $idea = Idea::factory()->create([
-            'user_id' => $user->id,
-            'category_id' => $categoryOne->id,
-            'status_id' => $statusOpen->id,
-            'title' => 'My First Idea',
-            'description' => 'Description for my first idea',
-        ]);
+        $idea = Idea::factory()->newData()->create();
 
         Vote::factory()->create([
             'idea_id' => $idea->id,
@@ -66,6 +56,7 @@ class VotesShowPageTest extends TestCase
             'idea_id' => $idea->id,
             'user_id' => $userB->id,
         ]);
+
 
         $this->get(route('idea.show', $idea))
             ->assertViewHas('votesCount', 2);

@@ -25,7 +25,7 @@
             <x-filter-dropdown wire:model='category'>
                 <x-filter-dropdown-item value="All Categories" name="All Categories" />
                 @foreach ($categories as $category)
-                    <x-filter-dropdown-item value="{{ $category->name }}" name="{{ $category->name }}" />
+                <x-filter-dropdown-item value="{{ $category->name }}" name="{{ $category->name }}" />
                 @endforeach
             </x-filter-dropdown>
         </div>
@@ -37,10 +37,10 @@
                 <x-filter-dropdown-item value="My Ideas" name="My Ideas" />
 
                 @admin
-                    <x-filter-dropdown-item value="Spam Ideas" name="Spam Ideas" />
+                <x-filter-dropdown-item value="Spam Ideas" name="Spam Ideas" />
                 @endadmin
                 @admin
-                    <x-filter-dropdown-item value="Spam Comments" name="Spam Comments" />
+                <x-filter-dropdown-item value="Spam Comments" name="Spam Comments" />
                 @endadmin
             </x-filter-dropdown>
         </div>
@@ -64,15 +64,14 @@
     <div class="ideas-container space-y-6 my-6">
 
         @forelse ($ideas as $idea)
-            {{-- idea container --}}
-            <livewire:idea-index :key="$idea->id" :idea="$idea" :votesCount="$idea->votes_count" />
-            {{-- end of idea container --}}
+        {{-- idea container --}}
+        <livewire:idea-index :key="$idea->id" :idea="$idea" :votesCount="$idea->votes_count" />
+        {{-- end of idea container --}}
         @empty
-            <div class="mx-auto w-70 mt-12">
-                <img src="{{ asset('images/no-ideas.svg') }}" alt="No Ideas" class="mx-auto"
-                    style="mix-blend-mode: luminosity">
-                <div class="text-gray-400 text-center mt-6 font-bold">No Ideas were found...</div>
-            </div>
+        <div class="mx-auto w-70 mt-12">
+            <img src="{{ asset('images/no-ideas.svg') }}" alt="No Ideas" class="mx-auto mix-blend-luminosity">
+            <div class="text-gray-400 text-center mt-6 font-bold">No Ideas were found...</div>
+        </div>
         @endforelse
 
 

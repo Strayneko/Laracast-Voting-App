@@ -1,4 +1,7 @@
 <x-app-layout>
+    <x-slot name="title">
+        {{ $idea->title }} | Laracasts Voting
+    </x-slot>
     {{-- back link --}}
     <div>
         <a href="{{ $backUrl }}" class="flex items-center font-semibold hover:underline">

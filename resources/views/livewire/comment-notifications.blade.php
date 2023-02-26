@@ -55,8 +55,7 @@
         @endforeach
         @else
         <li class="mx-auto w-40 py-6">
-            <img src="{{ asset('images/no-ideas.svg') }}" alt="No Ideas" class="mx-auto"
-                style="mix-blend-mode: luminosity">
+            <img src="{{ asset('images/no-ideas.svg') }}" alt="No Ideas" class="mx-auto mix-blend-luminosity">
             <div class="text-gray-400 text-center mt-6 font-bold">No Notifications were found...</div>
         </li>
         @endif

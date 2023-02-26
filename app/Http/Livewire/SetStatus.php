@@ -26,14 +26,22 @@ class SetStatus extends Component
     {
         if (!auth()->check() || !auth()->user()->isAdmin()) abort(403);
 
+        // check if the status is the same
+        if ($this->idea->status_id === (int) $this->status) {
+            $this->emit('statusWasUpdatedError', 'Status is the same!');
+            return;
+        }
+
         $this->idea->status_id = $this->status;
         $this->idea->save();
 
-        $this->emit('statusWasUpdated', 'Status was changed to ' . Status::find($this->status)->name);
 
+        $this->emit('statusWasUpdated', 'Status was changed to ' . Status::find($this->status)->name);
         if ($this->notifyAllVoters) {
             NotifyAllVoters::dispatch($this->idea);
         }
+
+
         // add commetn
         $comment = Comment::create([
             'user_id' => auth()->id(),

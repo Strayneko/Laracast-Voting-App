@@ -16,7 +16,7 @@ class CreateCommentsTable extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->foreignId('idea_id');
+            $table->foreignId('idea_id')->onDelete('cascade');
             $table->foreignId('status_id');
             $table->text('body');
             $table->integer('spam_reports')->default(0);
