@@ -1,4 +1,5 @@
 <div>
+    @auth
     <form wire:submit.prevent='createIdea' action="#" method="POST" class="space-y-4 px-4 py-6">
         <div>
             <input type="text" wire:model.defer="title"
@@ -6,7 +7,7 @@
                 placeholder="Your idea" required>
 
             @error('title')
-                <p class="text-theme-red text-xs mt-1">{{ $message }}</p>
+            <p class="text-theme-red text-xs mt-1">{{ $message }}</p>
             @enderror
         </div>
 
@@ -14,12 +15,12 @@
             <x-filter-dropdown name="category_add" id="category_add" class="bg-gray-100 text-sm"
                 wire:model.defer='category'>
                 @foreach ($categories as $category)
-                    <x-filter-dropdown-item name="{{ $category->name }}" value="{{ $category->id }}" required />
+                <x-filter-dropdown-item name="{{ $category->name }}" value="{{ $category->id }}" required />
                 @endforeach
             </x-filter-dropdown>
 
             @error('category')
-                <p class="text-theme-red text-xs mt-1">{{ $message }}</p>
+            <p class="text-theme-red text-xs mt-1">{{ $message }}</p>
             @enderror
         </div>
 
@@ -29,7 +30,7 @@
                 placeholder="Describe your idea" required></textarea>
 
             @error('description')
-                <p class="text-theme-red text-xs mt-1">{{ $message }}</p>
+            <p class="text-theme-red text-xs mt-1">{{ $message }}</p>
             @enderror
         </div>
 
@@ -52,13 +53,22 @@
         </div>
         {{-- <div>
             @if (session()->has('success_message'))
-                <div x-data="{ isVisible: true }" x-init="setTimeout(() => {
+            <div x-data="{ isVisible: true }" x-init="setTimeout(() => {
                     isVisible = false
-                }, 2000)" x-show="isVisible" x-transition
-                    class="text-theme-green mt-4">
-                    {{ session()->get('success_message') }}
-                </div>
+                }, 2000)" x-show="isVisible" x-transition class="text-theme-green mt-4">
+                {{ session()->get('success_message') }}
+            </div>
             @endif
         </div> --}}
     </form>
+    @else
+    <div class="my-6 text-center space-y-2">
+        <a wire:click.prevent='redirectToLogin' href="{{ route('login') }}"
+            class="inline-block justify-center w-1/2 h-9 text-xs bg-theme-blue-primary text-white font-semibold rounded-xl border border-blue hover:bg-blue-hover transition duration-150 ease-in px-6 py-2">Login</a>
+        <a wire:click.prevent='redirectToRegister' href="{{ route('register') }}"
+            class="inline-block justify-center w-1/2 h-9 text-xs bg-gray-200 font-semibold rounded-xl border border-gray-200 hover:border-gray-400 transition duration-150 ease-in px-6 py-2">
+            Sign Up
+        </a>
+    </div>
+    @endauth
 </div>

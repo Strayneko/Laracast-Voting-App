@@ -79,11 +79,11 @@ commentToScrollTo.classList.remove('bg-green-50')
         <div class="px-4 py-6">
             <p class="font-normal">Please login or create an account to post comment.</p>
             <div class="flex items-center space-x-3 mt-8">
-                <a href="{{ route('login') }}"
+                <a wire:click.prevent='redirectToLogin' href="{{ route('login') }}"
                     class="w-1/2 h-11 text-sm text-center bg-theme-blue-primary text-white font-semibold rounded-xl hover:bg-blue-hover transition duration-150 ease-in px-6 py-3">
                     Login
                 </a>
-                <a href="{{ route('register') }}"
+                <a wire:click.prevent='redirectToRegister' href="{{ route('register') }}"
                     class="flex items-center justify-center w-1/2 h-11 text-xs bg-gray-200 font-semibold rounded-xl border border-gray-200 hover:border-gray-400 transition duration-150 ease-in px-6 py-3">
                     Sign Up
                 </a>

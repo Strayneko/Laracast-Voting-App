@@ -75,20 +75,11 @@
                     </p>
                 </div>
 
-                @auth
+
                 {{-- form --}}
                 <livewire:create-idea />
                 {{-- end of form --}}
-                @else
-                <div class="my-6 text-center space-y-2">
-                    <a href="{{ route('login') }}"
-                        class="inline-block justify-center w-1/2 h-9 text-xs bg-theme-blue-primary text-white font-semibold rounded-xl border border-blue hover:bg-blue-hover transition duration-150 ease-in px-6 py-2">Login</a>
-                    <a href="{{ route('register') }}"
-                        class="inline-block justify-center w-1/2 h-9 text-xs bg-gray-200 font-semibold rounded-xl border border-gray-200 hover:border-gray-400 transition duration-150 ease-in px-6 py-2">
-                        Sign Up
-                    </a>
-                </div>
-                @endauth
+
 
             </div>
         </div>
