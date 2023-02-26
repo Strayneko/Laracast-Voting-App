@@ -686,9 +686,6 @@ select {
 .-right-1 {
   right: -0.25rem;
 }
-.-right-24 {
-  right: -6rem;
-}
 .-right-32 {
   right: -8rem;
 }
@@ -2188,6 +2185,10 @@ select {
     left: 0px;
   }
 
+  .md\:top-10 {
+    top: 2.5rem;
+  }
+
   .md\:top-6 {
     top: 1.5rem;
   }
@@ -2229,6 +2230,10 @@ select {
 
   .md\:mt-0 {
     margin-top: 0px;
+  }
+
+  .md\:mt-20 {
+    margin-top: 5rem;
   }
 
   .md\:block {
