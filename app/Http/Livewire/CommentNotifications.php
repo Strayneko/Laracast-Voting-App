@@ -47,8 +47,6 @@ class CommentNotifications extends Component
 
     public function markAsRead($notificationId)
     {
-        auth()->user()->unreadNotifications->markAsRead();
-
         $notification = DatabaseNotification::findOrFail($notificationId);
         $notification->markAsRead();
 
